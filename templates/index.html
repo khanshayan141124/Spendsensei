@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendSensei Ultimate</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>💸 SpendSensei</h1>
+        </header>
+
+        <div class="glow-card">
+            <div class="header-row">
+                <h3>TODAY'S SPEND</h3>
+                <h2 id="dash-total">₹0</h2>
+            </div>
+            <div class="budget-row">
+                <span id="budget-status">Set a budget below</span>
+            </div>
+        </div>
+
+        <div class="card chart-card">
+            <p class="section-label">Spending Breakdown</p>
+            <div class="chart-wrapper">
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card form-card">
+            <form id="expenseForm">
+                <div class="input-grid">
+                    <select id="curr"><option value="₹">₹</option><option value="$">$</option></select>
+                    <input type="number" id="amt" placeholder="Amount" required>
+                </div>
+                <div class="input-grid mt-2">
+                    <input type="text" id="cat" placeholder="Category (e.g., Food)" required>
+                    <button type="submit" id="addBtn">ADD</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card budget-setter">
+            <input type="number" id="budget-input" placeholder="Daily Budget (e.g. 1000)">
+            <button onclick="setBudget()">Set Goal</button>
+        </div>
+
+        <div class="list-section">
+            <div class="list-header">
+                <p class="section-label">Current Log</p>
+                <button onclick="openHistory()" class="text-link">View Past History</button>
+            </div>
+            <ul id="current-list"></ul>
+        </div>
+
+        <button id="saveBtn" class="primary-btn" onclick="saveDay()">SAVE EXPENSE FOR THE DAY</button>
+    </div>
+
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeHistory()">&times;</span>
+            <h2>📜 Past Expenses</h2>
+            <div class="history-controls">
+                <select id="history-filter" onchange="loadHistory()">
+                    <option value="all">All Time</option>
+                    <option value="month">Last 30 Days</option>
+                    <option value="week">Last 7 Days</option>
+                </select>
+                <h3 id="history-total">Total: ₹0</h3>
+            </div>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
